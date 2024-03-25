@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Fiddle</title>
+  </head>
+  <body>
+
+    <div class="videoWrapper">
+      <!-- <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/3FmUIvFg8QM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+      <iframe id="videoframe" width="560" height="315" src="https://www.youtube-nocookie.com/embed/QCNw8UhqzZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <h2 id="title">Chat</h2>
+
+    <section id="nickname-box">
+    <label id="nickname-label" for="nickname-input">Nickname: </label>
+    <input type="text" id="nickname-input" placeholder="Your nickname" >
+    </section>
+
+    <section id="input-box">
+    <input type="text" autofocus onkeypress="return isPressingEnter(event)" placeholder="Put your question here" id="message-input">
+    <button type="button" id="send-button" onclick="sendMessage()">Send [Enter]</button>
+    </section>
+
+    <section id="chat-box">
+    <section id="message-box">
+      <!-- <p><span>2021-07-06 22:04:39</span> <span>Natanael</span>: <span>Hallo</span></p> -->
+    </section>
+    </section>
+    </div>
+    </div>
+
+    <script src="/static/socket.io.min.js"></script>
+    <script src="/static/chat.js"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+version: '3'
+vars:
+  room_id_public: "!pEiajqhtGAlsenACpu:localhost"
+  room_id_support: "!ojdxyfsRCijQmSjxtz:localhost"
+tasks:
+  default:
+    cmds:
+      - task -a
+
+  install:
+    cmds:
+      - poetry install
+
+  serve:
+    env:
+      FASTBOT_DEBUG: true
+      FASTBOT_password: "Z0nbcxfpRjp4D5LCJu49"
+      FASTBOT_server: "http://localhost:8008"
+      FASTBOT_user: "@test_gecko:localhost"
+      FASTBOT_CORS_ALLOWED_ORIGIN: "http://localhost:8000"
+    cmds:
+      - poetry run gunicorn chat.fastbot:app --bind localhost:3000 --worker-class aiohttp.GunicornWebWorker
+
+  build:docker:
+    cmds:
+      - docker build -t chat .
+
+  serve:docker:
+    vars:
+      FASTBOT_DEBUG: true
+      FASTBOT_password: "Z0nbcxfpRjp4D5LCJu49"
+      FASTBOT_server: "http://synapse:8008"
+      FASTBOT_user: "@test_gecko:localhost"
+      FASTBOT_CORS_ALLOWED_ORIGIN: "http://localhost:8000"
+    cmds:
+      - docker run -it --network chat -p 3000:3000 -e FASTBOT_password={{.FASTBOT_password}} -e FASTBOT_server={{.FASTBOT_server}} -e FASTBOT_user="{{.FASTBOT_user}}" -e FASTBOT_CORS_ALLOWED_ORIGIN={{.FASTBOT_CORS_ALLOWED_ORIGIN}} chat

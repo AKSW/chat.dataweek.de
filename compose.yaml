@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  chat.2023.dataweek.de:
+    build: .
+    env_file:
+      - path: chat.dist.env
+        required: true
+      - path: chat.custom.env
+        required: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.services.dw-chat.loadbalancer.server.port=3000"
+      - "traefik.http.routers.dw-chat.rule=Host(`chat.2023.dataweek.de`)"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
