@@ -2,7 +2,9 @@ version: '3'
 
 services:
   chat.2024.dataweek.de:
-    build: .
+    build:
+      context: .
+      dockerfile: Containerfile
     env_file:
       - chat.dist.env
       - chat.custom.env
