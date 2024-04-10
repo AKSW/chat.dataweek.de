@@ -4,10 +4,8 @@ services:
   chat.2024.dataweek.de:
     build: .
     env_file:
-      - path: chat.dist.env
-        required: true
-      - path: chat.custom.env
-        required: true
+      - chat.dist.env
+      - chat.custom.env
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=web"
